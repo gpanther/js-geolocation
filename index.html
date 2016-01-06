@@ -21,8 +21,6 @@
         <p>A client-side geolocation service</p>
         <p class="view"><a href="https://github.com/gpanther/js-geolocation">View the Project on GitHub <small>gpanther/js-geolocation</small></a></p>
         <ul>
-          <li><a href="https://github.com/gpanther/js-geolocation/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/gpanther/js-geolocation/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/gpanther/js-geolocation">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
@@ -30,7 +28,91 @@
         <h1>
 <a id="js-geolocation" class="anchor" href="#js-geolocation" aria-hidden="true"><span class="octicon octicon-link"></span></a>js-geolocation</h1>
 
-<p>A client-side geolocation service</p>
+<p>A client-side geolocation service which using Google's services.</p>
+
+<h2>When to use it?</h2>
+
+<p>If you need geolocation data in your client applications and you are targeting browsers where <a href="http://html5demos.com/geo">the geolocation API</a>
+is not available (see <a href="http://caniuse.com/geolocation">canisue.com</a> for a quick overview of its availability).</p>
+
+<h2>Caveat emptor!</h2>
+
+<p>This is a free service and while I'm happy to provide some small funding to it, if you use it commercially, please support me through PayPal or Flattr:</p>
+
+<table>
+<tr>
+
+<td style="text-align: center">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="CMPUTSBXPD8HQ">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</td>
+
+<td style="text-align: center">
+<script id='fbeom66'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=1y32j1&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=62;f.width=55;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbeom66');</script>
+</td>
+
+</table>
+
+<h2>How to use it?</h2>
+
+<p>Call the following endpoints (using <a href="https://api.jquery.com/jquery.ajax/">jQuery.ajax</a> or equivalent mechanisms):</p>
+
+<pre><code><a href="https://eu-js-geolocation.appspot.com/api/geolocation?format=json" target="_blank">https://eu-js-geolocation.appspot.com/api/geolocation?format=json</a></code></pre>
+
+<p>This gives the geolocation for caller's (external) IP in the following format:</p>
+
+<pre><code>
+{
+    "city":"cluj-napoca",
+    "cityLatLong":{
+        "lat":46.777248,
+        "long":23.59989
+    },
+    "country":"RO",
+    "region":"cj"
+}
+</code></pre>
+
+<p>There is also an API to return the caller's external IP:</p>
+
+<pre><code><a href="https://eu-js-geolocation.appspot.com/api/ip?format=json" target="_blank">https://eu-js-geolocation.appspot.com/api/ip?format=json</a></code></pre>
+
+<p>This returns:</p>
+
+<pre><code>
+{
+    "ip":"128.96.11.38"
+}
+</pre></code>
+
+<p>In addition to JSON the service also supports JSONP. To use it specify <code>?format=jsonp&amp;callback=callback_name</code> (callback name can contain uppercase and lowercase letters and numbers). For example <a href="https://eu-js-geolocation.appspot.com/api/ip?format=jsonp&callback=test" target="_blank">https://eu-js-geolocation.appspot.com/api/ip?format=jsonp&callback=test</a> will reply with something like:</p>
+
+<pre><code>
+test({"ip":"128.96.11.38"});
+</pre></code>
+
+<p>The application has two instances deployed and depending where you anticipate most of your visitors coming from you should either use:</p>
+
+<ul>
+<li>The US instance: <a href="https://us-js-geolocation.appspot.com">https://us-js-geolocation.appspot.com</a></li>
+<li>The EU instance: <a href="https://eu-js-geolocation.appspot.com">https://eu-js-geolocation.appspot.com</a></li>
+</ul>
+
+<h2>More technical details</h2>
+
+<ul>
+<li>The application is implemented in <a href="https://golang.org/">Go</a> and deployed on <a href="https://cloud.google.com/appengine">Google App Engine</a></li>
+<li>The app is free/libre software and the complete source code is available under AGPLv3 license on <a href="https://github.com/gpanther/js-geolocation">GitHub</a>.</li>
+<li>The geolocation database is maintained by Google so you can be assured that you always get high-quality results.</li>
+<li>The application emmits the <a href="http://enable-cors.org/">CORS headers</a> needed to be used.</li>
+<li>The application asks the client to cache the query results for 1 hour to ease the load.</li>
+<li>Credit goes <a href="http://code.jbarker.com/">Jay Barker</a> for his <a href="https://github.com/jbarker/gae-ip-geolocation">gae-ip-geolocation</a> project which served as inspiration for this project.</li>
+</ul>
+
       </section>
     </div>
     <footer>
