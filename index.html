@@ -35,6 +35,10 @@
 <p>If you need geolocation data in your client applications and you are targeting browsers where <a href="http://html5demos.com/geo">the geolocation API</a>
 is not available (see <a href="http://caniuse.com/geolocation">canisue.com</a> for a quick overview of its availability).</p>
 
+<p>IP geolocation can give false results if the user is coming through a proxy / VPN / NAT service - in this case it will "locate" the exit point. Don't take the results of the API as absolute proof about the user's location!</p>
+
+<p>If you have a list of IPs for which you need to retrieve their approximate physical location, use something like the <a href="https://www.maxmind.com/en/geoip2-databases">MaxMind GeoIP database</a> which is also available in a <a href="http://dev.maxmind.com/geoip/geoip2/geolite2/">free version</a>. Just remember that IP blocks get reassigned all the time so you should get a version of the database "close" (in time) to when those IPs were collected.</p>
+
 <h2>Caveat emptor!</h2>
 
 <p>This is a free service and while I'm happy to provide some small funding to it, if you use it commercially, please support me through PayPal or Flattr:</p>
