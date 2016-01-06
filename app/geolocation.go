@@ -17,7 +17,7 @@ func init() {
 }
 
 func redirector(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "http://gpanther.github.io/js-geolocation/", http.StatusFound)
+	http.Redirect(w, r, "https://gpanther.github.io/js-geolocation/", http.StatusFound)
 }
 
 func addCorsHeaders(w http.ResponseWriter, r *http.Request) {
